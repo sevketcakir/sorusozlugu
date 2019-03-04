@@ -4,6 +4,7 @@ import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.logger.LocalLog;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.SelectArg;
 import com.j256.ormlite.stmt.Where;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -30,6 +31,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 public class SoruFX extends Application implements Initializable{
     @FXML TextField tfAranacak;
@@ -62,9 +64,11 @@ public class SoruFX extends Application implements Initializable{
     public void updateList(String aramaMetni) {
         try {
             QueryBuilder<Soru, String> queryBuilder = soruDao.queryBuilder();
-            Where where = queryBuilder.where().like("sorumetni", "%" + aramaMetni + "%");
+            SelectArg selectArg = new SelectArg();
+            Where where = queryBuilder.where().like("sorumetni", selectArg);
 
             PreparedQuery<Soru> preparedQuery = queryBuilder.orderBy("sorumetni", true).prepare();
+            selectArg.setValue("%" + aramaMetni + "%");
             List<Soru> sorular = soruDao.query(preparedQuery);
             tvGoster.setItems(FXCollections.observableArrayList(sorular));
             lbSoruSayisi.setText("Soru sayısı: " + soruDao.countOf());
@@ -113,6 +117,7 @@ public class SoruFX extends Application implements Initializable{
         selectedFile = fileChooser.showOpenDialog(primaryStage);
         if (selectedFile==null)
             return;
+        long baslangic = System.nanoTime();
         Workbook workbook= WorkbookFactory.create(selectedFile);
         Sheet sheet = workbook.getSheetAt(0);
         DataFormatter dataFormatter = new DataFormatter();
@@ -131,6 +136,11 @@ public class SoruFX extends Application implements Initializable{
 
         updateList("%%");
 
+        long gecenSure = TimeUnit.SECONDS.convert(System.nanoTime()-baslangic, TimeUnit.NANOSECONDS);
+        Alert alert=new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Geçen süre");
+        alert.setContentText("Geçen süre: "+gecenSure+" sn");
+        alert.showAndWait();
     }
 
     public void temizle(ActionEvent actionEvent) {

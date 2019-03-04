@@ -8,23 +8,23 @@
         <option name="htmlPlaceholderId" value="" />
         <option name="title" value="Soru Bankası" />
         <option name="vendor" value="" />
-        <option name="version" value="" />
+        <option name="version" value="1.0.1" />
       </options>
     </properties>
     <root id="root">
       <element id="archive" name="sorusozlugu.jar">
         <element id="module-output" name="sorusozlugu" />
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Maven: com.j256.ormlite:ormlite-jdbc:5.0" />
-          <element id="library" level="project" name="Maven: org.xerial:sqlite-jdbc:3.7.2" />
-          <element id="library" level="project" name="Maven: com.j256.ormlite:ormlite-core:5.0" />
           <element id="library" level="project" name="Maven: com.github.virtuald:curvesapi:1.04" />
+          <element id="library" level="project" name="Maven: com.j256.ormlite:ormlite-jdbc:5.0" />
+          <element id="library" level="project" name="Maven: com.j256.ormlite:ormlite-core:5.0" />
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.10" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-collections4:4.1" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml-schemas:3.17" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi-ooxml:3.17" />
           <element id="library" level="project" name="Maven: org.apache.poi:poi:3.17" />
           <element id="library" level="project" name="Maven: org.apache.xmlbeans:xmlbeans:2.6.0" />
+          <element id="library" level="project" name="Maven: org.xerial:sqlite-jdbc:3.7.2" />
           <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
         </element>
       </element>
